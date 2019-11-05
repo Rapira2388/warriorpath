@@ -1,4 +1,4 @@
-SITE_NAME = 'Hexchan'
+SITE_NAME = 'ch.krd.dev'
 
 
 DATE_TIME_FORMAT = 'd.m.Y в H:i:s'
