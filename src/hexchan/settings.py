@@ -8,14 +8,13 @@ SETTINGS_PATH = Path(__file__).resolve()
 BASE_DIR = SETTINGS_PATH.parents[1]
 STORAGE_DIR = BASE_DIR / '..' / 'dev'
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'cl-x4wji(%=&43=*tla3+n-)vr4220%(_tiwh&@^(=dyw*=r2x'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'just_random_string')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'True'
 
 # Hosts
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+allowed_host = os.environ.get('ALLOWED_HOSTS', '')
+ALLOWED_HOSTS = ('*',) if allowed_host == '' else allowed_host.split(',')
 INTERNAL_IPS = ['127.0.0.1']
 
 # Application definition
@@ -127,13 +126,15 @@ STATICFILES_DIRS = [
 ]
 
 # Uploads
+AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL')
+AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 if AWS_ACCESS_KEY_ID:
     MEDIA_ROOT = 'upload'
-    MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/upload/'
+    MEDIA_URL = os.environ.get('MEDIA_URL')
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 else:
     MEDIA_ROOT = str(STORAGE_DIR / 'upload')
