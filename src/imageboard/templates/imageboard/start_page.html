@@ -36,7 +36,7 @@
     <style>
         {% for board in boards %}
             {% if not board.is_hidden and not board.is_deleted %}
-                {{ board.custom_style }}
+                {{ board.custom_style|safe }}
             {% endif %}
         {% endfor %}
     </style>
