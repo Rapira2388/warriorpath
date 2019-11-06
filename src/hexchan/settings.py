@@ -113,7 +113,7 @@ LANGUAGES = [
   ('ru', _('Russian')),
   ('en', _('English')),
 ]
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
