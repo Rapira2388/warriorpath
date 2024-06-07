@@ -1,4 +1,4 @@
-SITE_NAME = 'ch.krd.dev'
+SITE_NAME = 'WarriorPath'
 
 
 DATE_TIME_FORMAT = 'd.m.Y в H:i:s'

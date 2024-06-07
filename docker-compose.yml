@@ -34,15 +34,27 @@ services:
       - DB_NAME=hexchan
       - DB_USER=hexchan
       - DB_PASSWORD=hexchan
-#      - AWS_ACCESS_KEY_ID=
-#      - AWS_SECRET_ACCESS_KEY=
-#      - AWS_STORAGE_BUCKET_NAME=
+      - ALLOWED_HOSTS=warriorpath.online,www.warriorpath.online,45.146.165.216
     ports:
-      - "8081:8081"
-      - "8444:8444"
+      - "8081:8000"
     networks:
       - net
     depends_on:
       - db
     links:
       - db
+
+  nginx:
+    image: nginx:latest
+    container_name: hexchan_nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - app
+    networks:
+      - net
