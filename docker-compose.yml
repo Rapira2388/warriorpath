@@ -45,7 +45,9 @@ services:
       - db
 
   nginx:
-    image: nginx:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
     container_name: hexchan_nginx
     restart: always
     ports:
